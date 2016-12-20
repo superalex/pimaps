@@ -30,11 +30,10 @@ with open(OUTPUT_IMAGES, "wb") as rectangles_bs, open(OUTPUT_LABELS, "wb") as la
     labels_bs.write(magic_labels.to_bytes(4, byteorder = 'big'))
     labels_bs.write(TOTAL.to_bytes(4, byteorder = 'big'))
 
-    img = Image.new("L", (28, 28), "black")
-
     for n in range(TOTAL):
         print(n+1, "/", TOTAL)
-        rectangles = randint(1, 3)
+        img = Image.new("L", (28, 28), "black")
+        rectangles = randint(1, 2)
         for r in range(rectangles):
             x0 = randint(0, WIDTH-15)
             y0 = randint(0, HEIGHT-15)
@@ -45,6 +44,7 @@ with open(OUTPUT_IMAGES, "wb") as rectangles_bs, open(OUTPUT_LABELS, "wb") as la
         pixels = img.load()
         pixels_array = numpy.empty([28, 28], dtype=numpy.uint8)
 
+        img.show()
         for i in range(img.size[0]):
             for j in range(img.size[1]):
                 pixel = pixels[i, j]
